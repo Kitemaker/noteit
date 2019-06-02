@@ -9,7 +9,7 @@ export const ITEMS = [
   },
   {
     id: 'todos',
-    name: 'To-Dos',
+    name: 'To-Do Lists',
     superpower: ''
   }
  ]

@@ -13,17 +13,11 @@ class NavBar extends Component {
 <div className="collapse navbar-collapse" id="navbarsExampleDefault">
   <ul className="navbar-nav mr-auto">
     <li className="nav-item">
-      <Link className="nav-link" to={`/kingdom/${username}`}>Notes</Link>
+      <Link className="nav-link" to={`/notes/${username}`}>Notes</Link>
     </li>
     <li className="nav-item">
-      <Link className="nav-link" to="/animals">To-Dos</Link>
-    </li>
-    <li className="nav-item">
-      <Link className="nav-link" to="/territories">Territories</Link>
-    </li>
-    <li className="nav-item">
-      <Link className="nav-link" to="/others">Other Kingdoms</Link>
-    </li>
+      <Link className="nav-link" to={`/todos/${username}`}>To-Dos</Link>
+    </li>  
   </ul>
 </div>
 <ul className="navbar-nav mr-auto">

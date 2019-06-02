@@ -7,6 +7,7 @@ import Subject from './Subject'
 import { appConfig, SUBJECTS_FILENAME, EXPLORER_URL } from './constants'
 
 import './Dashboard.css'
+import OptionsList from './OptionsList';
 
 class Dashboard extends Component {
 
@@ -122,6 +123,9 @@ class Dashboard extends Component {
       <div className="Dashboard">
         <div className="row">
           {currentUsername}
+          <div>
+            <OptionsList type="ITEMS"/>
+          </div>
           
           
         </div>

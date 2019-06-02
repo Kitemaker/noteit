@@ -8,7 +8,8 @@ import OptionsList from './OptionsList'
 import OtherKingdoms from './OtherKingdoms'
 import { appConfig, ME_FILENAME } from './constants'
 import './SignedIn.css'
-
+import NotesList from './NotesList';
+import TodosList from './TodosList';
 
 class SignedIn extends Component {
 
@@ -81,17 +82,27 @@ class SignedIn extends Component {
       )
     }
 
-    debugger;
+    
     return (
       <div className="SignedIn">
       <NavBar username={username} signOut={this.signOut}/>
       <Switch>
               <Route
-                path='/animals'
+                path={`/notes/${username}`}
                 render={
-                  routeProps => <OptionsList
-                  type="animals"
-                  {...routeProps} />
+                  routeProps => <NotesList
+                  type="notes"
+                  {...routeProps} />               
+                  
+                }
+              />
+              <Route
+                path={`/todos/${username}`}
+                render={
+                  routeProps => <TodosList
+                  type="todos"
+                  {...routeProps} />               
+                  
                 }
               />
               <Route

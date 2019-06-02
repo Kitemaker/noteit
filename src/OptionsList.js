@@ -12,14 +12,14 @@ class OptionsList extends Component {
     }
     return (
       <div className="OptionsList container">
-          <h2>Available { type } on this planet</h2>
+          <h2>Please Select: </h2>
           <div className="card-deck">
             {options.map((option, index) => {
             return (
               <div className="card">
               <h4 className="card-header">{ option.name }</h4>
               <img className="card-img-top"
-                src={`/${type}/${option.id}.jpg`}
+                src={`/${type}/${option.id}.png`}
                 alt={option.name}
               />
               <div className="card-body">
