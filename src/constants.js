@@ -1,6 +1,8 @@
 import { AppConfig } from 'blockstack'
 
 export const appConfig = new AppConfig(['store_write', 'publish_data'])
+
+export const NOTES_FILE = "notes.json"
 export const ITEMS = [
   {
     id: 'notes',

@@ -124,7 +124,7 @@ class Dashboard extends Component {
         <div className="row">
           {currentUsername}
           <div>
-            <OptionsList type="ITEMS"/>
+            <OptionsList type="ITEMS" currentUsername = {currentUsername}/>
           </div>
           
           

@@ -10,6 +10,7 @@ import { appConfig, ME_FILENAME } from './constants'
 import './SignedIn.css'
 import NotesList from './NotesList';
 import TodosList from './TodosList';
+import NoteForm from './NoteForm';
 
 class SignedIn extends Component {
 
@@ -81,7 +82,7 @@ class SignedIn extends Component {
         <Redirect to={`/dashboard/${username}`} />
       )
     }
-
+    debugger;
     
     return (
       <div className="SignedIn">
@@ -91,6 +92,7 @@ class SignedIn extends Component {
                 path={`/notes/${username}`}
                 render={
                   routeProps => <NotesList
+                  username ={username}
                   type="notes"
                   {...routeProps} />               
                   
@@ -101,6 +103,14 @@ class SignedIn extends Component {
                 render={
                   routeProps => <TodosList
                   type="todos"
+                  {...routeProps} />               
+                  
+                }
+              />
+              <Route
+                path={`/notes/${username}`}
+                render={
+                  routeProps => <NoteForm                  
                   {...routeProps} />               
                   
                 }
@@ -137,8 +147,7 @@ class SignedIn extends Component {
                   routeProps => <Dashboard
                   myKingdom={true}
                   protocol={window.location.protocol}
-                  user={username}
-                  currentUsername={username}
+                  username={username}                  
                   realm={window.location.origin.split('//')[1]}
                   {...routeProps} />
                 }
