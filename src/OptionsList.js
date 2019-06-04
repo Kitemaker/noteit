@@ -1,17 +1,20 @@
 import React, { Component } from 'react'
-import { ITEMS, TERRITORIES } from './constants'
+import { ITEMS, appConfig } from './constants'
 import './OptionsList.css'
 import { Link } from 'react-router-dom'
+import { UserSession } from 'blockstack'
 
 class OptionsList extends Component {
 
   render() {
-    const type = this.props.type
-    
+    this.userSession = new UserSession({ appConfig })
+    this.username = this.userSession.loadUserData().username
+    const type = this.props.type;
+   
     let options = ITEMS
-    if (type === 'territories') {
-      options = TERRITORIES
-    }
+    // if (type === 'territories') {
+    //   options = TERRITORIES
+    // }
     return (
       <div className="OptionsList container">
           <h2>Please Select: </h2>
@@ -20,7 +23,7 @@ class OptionsList extends Component {
             return (
               <div className="card">            
               <h4 className="card-header">{ option.name }</h4>
-              <Link className="nav-link" to={`/notes/${this.props.currentUsername}`}>
+              <Link className="nav-link" to={`/${option.id}/${this.username}`}>
                 <img className="card-img-top"  src={`/${type}/${option.id}.png`}  alt={option.name}  ></img>
               </Link>
               <div className="card-body">

@@ -4,13 +4,11 @@ import { UserSession } from 'blockstack'
 import EditMe from './EditMe'
 import Dashboard from './Dashboard'
 import NavBar from './NavBar'
-import OptionsList from './OptionsList'
-import OtherKingdoms from './OtherKingdoms'
 import { appConfig, ME_FILENAME } from './constants'
 import './SignedIn.css'
 import NotesList from './NotesList';
 import TodosList from './TodosList';
-import NoteForm from './NoteForm';
+
 
 class SignedIn extends Component {
 
@@ -106,31 +104,8 @@ class SignedIn extends Component {
                   {...routeProps} />               
                   
                 }
-              />
-              <Route
-                path={`/notes/${username}`}
-                render={
-                  routeProps => <NoteForm                  
-                  {...routeProps} />               
-                  
-                }
-              />
-              <Route
-                path='/territories'
-                render={
-                  routeProps => <OptionsList
-                  type="territories"
-                  {...routeProps} />
-                }
-              />
-              <Route
-                path='/others'
-                render={
-                  routeProps => <OtherKingdoms
-                  type="territories"
-                  {...routeProps} />
-                }
-              />
+              />   
+              
               <Route
                 path='/me'
                 render={
