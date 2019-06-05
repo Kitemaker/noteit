@@ -16,9 +16,9 @@ class TodosList extends React.Component {
     this.markTodoDone = this.markTodoDone.bind(this);
     this.state = {todoItems: todoItems};
     this.todoItems = [];
-this.todoItems.push({index: 1, idGenerator(): "learn react", done: false});
-this.todoItems.push({index: 2, idGenerator(): "Go shopping", done: true});
-this.todoItems.push({index: 3, idGenerator(): "buy flowers", done: true});
+this.todoItems.push({index: idGenerator(), value: "learn react", done: false});
+this.todoItems.push({index: idGenerator(), value: "Go shopping", done: true});
+this.todoItems.push({index: idGenerator(), value: "buy flowers", done: true});
   }
   addItem(newItemValue) {
     console.log('msg from addItem', newItemValue);
