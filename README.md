@@ -1,4 +1,4 @@
-# NoteIt app
+# Notit app
 
 
 

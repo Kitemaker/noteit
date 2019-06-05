@@ -16,9 +16,9 @@ class TodosList extends React.Component {
     this.markTodoDone = this.markTodoDone.bind(this);
     this.state = {todoItems: todoItems};
     this.todoItems = [];
-this.todoItems.push({index: idGenerator(), value: "learn react", done: false});
-this.todoItems.push({index: idGenerator(), value: "Go shopping", done: true});
-this.todoItems.push({index: idGenerator(), value: "buy flowers", done: true});
+this.todoItems.push({index: 1, value: "learn react", done: false});
+this.todoItems.push({index: 2, value: "Go shopping", done: true});
+this.todoItems.push({index: 3, value: "buy flowers", done: true});
   }
   addItem(newItemValue) {
     console.log('msg from addItem', newItemValue);
@@ -52,6 +52,7 @@ this.todoItems.push({index: idGenerator(), value: "buy flowers", done: true});
             return <TodoListItem
             item={item}
             key = {item.index}
+            index = {item.index}
             removeItem={this.removeItem}
             markTodoDone={this.markTodoDone}/>
 
