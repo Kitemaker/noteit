@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './TodosList.css';
-class TodoForm extends React.Component {
+class TodoForm extends Component {
     constructor(props) {
       super(props);
       this.onSubmit = this.onSubmit.bind(this);

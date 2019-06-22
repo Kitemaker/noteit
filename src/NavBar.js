@@ -8,7 +8,7 @@ class NavBar extends Component {
     const username = this.props.username
     return (
 <nav className="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-<Link className="navbar-brand" to="/">NoteIt</Link>
+<Link className="navbar-brand" to="/">NotIt</Link>
 
 <div className="collapse navbar-collapse" id="navbarsExampleDefault">
   <ul className="navbar-nav mr-auto">

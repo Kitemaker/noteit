@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link, Redirect } from 'react-router-dom'
+//import { Link, Redirect } from 'react-router-dom'
 //import { ITEMS, TERRITORIES } from './constants'
 import './NotesList.css'
 import { UserSession } from 'blockstack'

@@ -5,10 +5,10 @@ import TodoForm from './TodoForm';
 
 import todoItems from './TodoListItem';
 import TodoListItem from './TodoListItem';
-import idGenerator from 'react-id-generator';
+//import idGenerator from 'react-id-generator';
 
 
-class TodosList extends React.Component {
+class TodosList extends Component {
   constructor (props) {
     super(props);
     this.addItem = this.addItem.bind(this);

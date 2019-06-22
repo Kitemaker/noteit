@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+//import { Link } from 'react-router-dom'
 import { UserSession } from 'blockstack'
 import { jsonCopy, subjectFromKingdomUrl,
   loadUser, loadSubjects, resolveSubjects } from './utils'
-import Subject from './Subject'
-import { appConfig, SUBJECTS_FILENAME, EXPLORER_URL } from './constants'
+//import Subject from './Subject'
+import { appConfig, SUBJECTS_FILENAME } from './constants'
 
 import './Dashboard.css'
 import OptionsList from './OptionsList';
@@ -109,15 +109,11 @@ class Dashboard extends Component {
   }
 
   render() {
-    const mine = this.props.myKingdom
-    const user = this.state.user
-    const rulerAnimal = user.notes
-    const rulerTerritory = user.todos
-    const username = this.state.rulerUsername
+    
+       
     //const subjects = this.state.subjects
    // const myKingdom = this.props.myKingdom
-    const app = this.state.app
-    const clickAdd = this.state.clickAdd
+    
     const currentUsername = this.props.currentUsername
     return (
       <div className="Dashboard">

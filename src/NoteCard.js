@@ -5,7 +5,7 @@ import './NoteCard.css'
 class NoteCard extends Component {
 
   render() {
-    const  key = this.props.key
+   
     const  title = this.props.title
     const  value = this.props.value  
     return (

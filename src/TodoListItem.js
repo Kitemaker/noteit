@@ -3,7 +3,7 @@ import './TodosList.css';
 
 
 
-class TodoListItem extends React.Component {
+class TodoListItem extends Component {
     constructor(props) {
       super(props);
       this.onClickClose = this.onClickClose.bind(this);
