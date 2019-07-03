@@ -25,7 +25,7 @@ class Landing extends Component {
       <div className="Landing">
         <div className="form-signin">
         <Grid container justify="center" alignItems="center">         
-          <Avatar alt="FR" src="icon-192x192.png"  style={{margin:"10px",  width: "60", height: "60"}}/>
+          <Avatar alt="" src="notit.png"  style={{margin:"10px",  width: "60", height: "60"}}/>
         </Grid>
           <h1 className="h1 mb-3 font-weight-normal">Notit</h1>
           <Button variant="contained" color="primary"   onClick={this.signIn.bind(this)}>Sign in with Blockstack           
