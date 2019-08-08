@@ -84,7 +84,7 @@ class SignedIn extends Component {
     
     return (
       <div className="SignedIn">
-      {/* <NavBar username={username} signOut={this.signOut}/> */}
+      <NavBar username={username} signOut={this.signOut}/>
       <Switch>
               <Route
                 path={`/notes/${username}`}
@@ -127,7 +127,18 @@ class SignedIn extends Component {
                   {...routeProps} />
                 }
               />
-              
+              <Route
+                path='/dashboard/:protocol/:realm/:ruler'
+                render={
+                  routeProps => <Dashboard
+                  myKingdom={false}
+                  protocol={routeProps.match.params.protocol}
+                  realm={routeProps.match.params.realm}
+                  ruler={routeProps.match.params.ruler}
+                  currentUsername={username}
+                  {...routeProps} />
+                }
+              />
       </Switch>
       </div>
     );
