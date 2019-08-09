@@ -15,48 +15,14 @@ class SignedIn extends Component {
   constructor(props) {
     super(props)
     this.userSession = new UserSession({ appConfig })
-    this.state = {
-      me: {},
-      savingMe: false,
-      savingKingdown: false,
-      redirectToMe: false
-    }
-
-    ;
-    this.loadMe = this.loadMe.bind(this)
-    this.saveMe = this.saveMe.bind(this)
+    this.state = {   
+      savingMe: false,   
+    } 
     this.signOut = this.signOut.bind(this)
   }
 
-  componentWillMount() {
-    this.loadMe()
-  }
-
-  loadMe() {
-    const options = { decrypt: false }
-    this.userSession.getFile(ME_FILENAME, options)
-    .then((content) => {
-      if(content) {
-        const me = JSON.parse(content)
-        this.setState({me, redirectToMe: false})
-      } else {
-        const me = null
-
-        this.setState({me, redirectToMe: true})
-      }
-    })
-  }
-
-  saveMe(me) {
-    this.setState({me, savingMe: true})
-    const options = { encrypt: false }
-    this.userSession.putFile(ME_FILENAME, JSON.stringify(me), options)
-    .finally(() => {
-      this.setState({savingMe: false})
-    })
-  }
-
   signOut(e) {
+    console.log('message from signOut');
     e.preventDefault()
     this.userSession.signUserOut()
     window.location = '/'
@@ -64,71 +30,11 @@ class SignedIn extends Component {
 
   render() {
     const username = this.userSession.loadUserData().username
-    const me = this.state.me
-    const redirectToMe = this.state.redirectToMe
-    if(redirectToMe) {
-      // User hasn't configured her animal
-      if(window.location.pathname !== '/me') {
-        return (
-          <Redirect to="/me" />
-        )
-      }
-    }
-
-    if(window.location.pathname === '/') {
-      return (
-        <Redirect to={`/dashboard/${username}`} />
-      )
-    }
-    debugger;
+    const me = this.state.me   
     
     return (
       <div className="SignedIn">
-      {/* <NavBar username={username} signOut={this.signOut}/> */}
-      <Switch>
-              <Route
-                path={`/notes/${username}`}
-                render={
-                  routeProps => <NotesList
-                  username ={username}
-                  type="notes"
-                  {...routeProps} />               
-                  
-                }
-              />
-              <Route
-                path={`/todos/${username}`}
-                render={
-                  routeProps => <TodosList
-                  type="todos"
-                  {...routeProps} />               
-                  
-                }
-              />   
-              
-              <Route
-                path='/me'
-                render={
-                  routeProps => <EditMe
-                  me={me}
-                  saveMe={this.saveMe}
-                  username={username}
-                  {...routeProps} />
-                }
-              />
-              <Route
-                path={`/dashboard/${username}`}
-                render={
-                  routeProps => <Dashboard
-                  myKingdom={true}
-                  protocol={window.location.protocol}
-                  username={username}                  
-                  realm={window.location.origin.split('//')[1]}
-                  {...routeProps} />
-                }
-              />
-              
-      </Switch>
+        <Dashboard currentUsername={username} signOut={this.signOut}></Dashboard>   
       </div>
     );
   }
