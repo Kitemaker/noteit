@@ -29,7 +29,10 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import PeopleIcon from '@material-ui/icons/People';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import LayersIcon from '@material-ui/icons/Layers';
+import { appConfig , NOTES_FILE} from './constants'
+import { UserSession } from 'blockstack'
 import AssignmentIcon from '@material-ui/icons/Assignment';
+import { read } from 'fs';
 
 const drawerWidth = 240;
 
@@ -122,14 +125,31 @@ export default function Dashboard(props) {
     setOpen(false);
   };
 
-
+  function readNotes(){
+    
+    let options = {
+      decrypt: false
+    };     
+    const  userSession = new UserSession({ appConfig })   
+    userSession.getFile(NOTES_FILE, options)
+    .then((fileContents) => {
+      if(fileContents) {
+        console.log("message from readNotes getfile items  = ", JSON.parse(fileContents));
+        let notelist = JSON.parse(fileContents);
+        return notelist.data
+      };
+    });
+   
+  }
 
   const [values, setValues] = React.useState({
-    activeItem: 'Dashboard',
-    notesCount: 0,
-    todosCount:0
+    activeItem: 'Dashboard',    
+    notesData: readNotes
     
   });
+
+   
+  
 
 function ListItemClicked(event){
   console.log('itemclicked ', event, event.target.textContent);
@@ -224,23 +244,21 @@ function ListItemClicked(event){
           <Grid container spacing={1}>
             {/* Chart */}
             <Grid item xs={12} md={8} >
-              <Paper className={classes.paper}>
+              <Paper className={classes.paper} >
                 {                
-                  (values.activeItem === 'Dashboard')?                
-                    <OptionsList type="ITEMS"  currentUsername = {props.currentUsername}/>
+                  (values.activeItem === 'Dashboard')? 
+                                   
+                    <OptionsList type="ITEMS"  currentUsername = {props.currentUsername} />
                     :
                     (values.activeItem === 'Notes')?
-                    <NotesList></NotesList>
-                    :
-                    (values.activeItem === 'Todos')?
-                    <TodosList></TodosList>
-                    :
-                    <OptionsList type="ITEMS"  currentUsername = {props.currentUsername}/>
-
-
-        
+                      <NotesList></NotesList>
+                      :
+                      (values.activeItem === 'Todos')?
+                      <TodosList></TodosList>
+                      :
+                      <OptionsList type="ITEMS"  currentUsername = {props.currentUsername}/>        
                 
-                }}
+                }
               </Paper>
             </Grid>         
           </Grid>

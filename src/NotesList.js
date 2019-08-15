@@ -4,8 +4,14 @@ import React, { Component } from 'react'
 import './NotesList.css'
 import { UserSession } from 'blockstack'
 import { appConfig , NOTES_FILE} from './constants'
-import NoteCard from './NoteCard'
+//import NoteCard from './NoteCard'
+import NoteCardNew from './NoteCardNew'
 import idGenerator from 'react-id-generator';
+import { makeStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import { Paper } from '@material-ui/core';
 class NotesList extends Component {
 
   constructor(props) {
@@ -22,6 +28,30 @@ class NotesList extends Component {
 
    // this.readNotes =  this.readNotes.bind(this)   
     console.log('from constructor', this.state.notes);
+    this.useStyles = makeStyles(theme => ({
+      container: {
+        display: 'flex',
+        flexWrap: 'wrap',
+      },
+      textField: {
+        marginLeft: theme.spacing(2),
+        marginRight: theme.spacing(3),
+      },
+      dense: {
+        marginTop: theme.spacing(2),
+      },
+      menu: {
+        width: 200,
+      },
+      paper: {
+        padding: theme.spacing(5,20),
+
+        display: 'flex',
+        overflow: 'auto',
+        flexDirection: 'column',
+        margin: theme.margin(10),
+      },
+    }));
   }
 
   componentWillMount() {
@@ -121,20 +151,47 @@ class NotesList extends Component {
 
     return (
       <div className="OptionsList container">        
-          <div className="w3-container w3-teal"> <h2>Add Note</h2></div>
+          <Typography variant="h3" gutterBottom color="textPrimary">
+            Add Note...
+          </Typography>
           <div>
-              <form className="w3-container w3-card-4">
+              <Paper className={this.useStyles.paper}>
                 <div>
-                  <input className="w3-input w3-border" type="text" required=""  onChange={this.handleTitleChange} placeholder="note title..."/>     
+                  {/* <input className="w3-input w3-border" type="text" required=""  onChange={this.handleTitleChange} placeholder="note title..."/>  
+                    */}
+
+                  <TextField
+                          id="note-title"
+                          label="Title"
+                          fullWidth
+                          className={this.useStyles.textField}                          
+                          onChange={this.handleTitleChange}
+                          margin="normal"
+                          variant="outlined"
+                          placeholder="enter title"
+                        />
                 </div> 
-                <textarea className="w3-input w3-border" style={{resize:"none"}} autoComplete="off" onChange={this.handleValueChange}  placeholder="write note here..."/>
-                <div><button type="button" className="w3-btn w3-padding w3-teal" onClick={this.addNoteHandler} style={{width:"120px"}}>Add </button></div>              
-              </form>
+                {/* <textarea className="w3-input w3-border" style={{resize:"none"}} autoComplete="off" onChange={this.handleValueChange}  placeholder="write note here..."/> */}
+                <TextField
+                      id="note-value"
+                      label="Text"
+                      fullWidth
+                      multiline
+                      rows="4"
+                      placeholder="enter note"
+                      className={this.useStyles.textField}
+                      onChange={this.handleValueChange}
+                      margin="normal"
+                      variant="outlined"
+                    />
+                {/* <div><button type="button" className="w3-btn w3-padding w3-blue" onClick={this.addNoteHandler} style={{width:"120px"}}>Add </button></div>  */}
+                <Button variant="contained" fullWidth onClick={this.addNoteHandler} color="primary">Add </Button>             
+                </Paper>
           </div>
           <div className="card-deck" style={{marginTop:"20px"}}>
             
             {cardarray.map((option, index) => {
-            return <NoteCard 
+            return <NoteCardNew
                   click={() => this.deleteNoteHandler(index)}
                   key={option.id} 
                   title = {option.name}
