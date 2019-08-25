@@ -178,7 +178,7 @@ function ListItemClicked(event){
             <MenuIcon />
           </IconButton>
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-            Dashboard
+            {values.activeItem}
           </Typography>
           <Typography component="h1" variant="caption" color="inherit" style={{marginRight:"10px"}}>
               {props.username}    

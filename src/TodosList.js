@@ -16,15 +16,15 @@ class TodosList extends Component {
     this.markTodoDone = this.markTodoDone.bind(this);
     this.state = {todoItems: todoItems};
     this.todoItems = [];
-this.todoItems.push({index: 1, value: "learn react", done: false});
-this.todoItems.push({index: 2, value: "Go shopping", done: true});
-this.todoItems.push({index: 3, value: "buy flowers", done: true});
+    // this.todoItems.push({index: 1, value: "learn react", done: false});
+    // this.todoItems.push({index: 2, value: "Go shopping", done: true});
+    // this.todoItems.push({index: 3, value: "buy flowers", done: true});
   }
-  addItem(newItemValue) {
-    console.log('msg from addItem', newItemValue);
+  addItem(newItem) {
+    console.log('msg from addItem', newItem);
     this.todoItems.unshift({
-      index: this.todoItems.length+1, 
-      value: newItemValue, 
+      index: this.todoItems.length, 
+      value: newItem.newItemValue, 
       done: false
     });
     this.setState({todoItems: this.todoItems});
@@ -34,26 +34,29 @@ this.todoItems.push({index: 3, value: "buy flowers", done: true});
     this.todoItems.splice(itemIndex, 1);
     this.setState({todoItems: this.todoItems});
   }
-  markTodoDone(itemIndex) {
-    console.log('msg from markTodoDone', itemIndex);
-    var todo = this.todoItems[itemIndex];
-    this.todoItems.splice(itemIndex, 1);
+  markTodoDone(event) {
+    console.log('msg from markTodoDone', event);
+    var todo = this.todoItems[event.target.value];
+    //this.todoItems.splice(event.target.value, 1);
     todo.done = !todo.done;
-    todo.done ? this.todoItems.push(todo) :this.todoItems.unshift(todo);
+    this.todoItems[event.target.value] = todo;
+  //  todo.done ? this.todoItems.push(todo) :this.todoItems.unshift(todo);
     this.setState({todoItems: this.todoItems});  
   }
   render() {
     return (
       <div id="main">
         <h2>To Do List</h2>
-        <div style={{width:"80%", marginLeft:"10%", marginRight:"10%"}}>
+        <div style={{width:"100%"}}>
             
-            {this.todoItems.map((item, index) => {
+            {this.todoItems.map((item) => {
             return <TodoListItem
             item={item}
             key = {item.index}
             index = {item.index}
+            value = {item.value}
             removeItem={this.removeItem}
+            done = {item.done}
             markTodoDone={this.markTodoDone}/>
 
             })} 

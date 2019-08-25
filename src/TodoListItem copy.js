@@ -27,7 +27,7 @@ class TodoListItem extends Component {
             <Checkbox 
             id = {this.props.index}
             checked={this.props.done}  onChange={this.props.markTodoDone}
-            value={this.props.index}
+            value={this.props.value}
             inputProps={{'aria-label': 'primary checkbox',}}
       />
             {this.props.item.value}

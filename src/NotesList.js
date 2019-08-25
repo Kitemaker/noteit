@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-//import { Link, Redirect } from 'react-router-dom'
-//import { ITEMS, TERRITORIES } from './constants'
 import './NotesList.css'
 import { UserSession } from 'blockstack'
 import { appConfig , NOTES_FILE} from './constants'
@@ -12,6 +10,9 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { Paper } from '@material-ui/core';
+
+
+
 class NotesList extends Component {
 
   constructor(props) {
@@ -191,11 +192,12 @@ class NotesList extends Component {
           <div className="card-deck" style={{marginTop:"20px"}}>
             
             {cardarray.map((option, index) => {
-            return <NoteCardNew
+            return <div ><NoteCardNew
                   click={() => this.deleteNoteHandler(index)}
                   key={option.id} 
                   title = {option.name}
                   value={option.text} />
+                  </div>
                 
             })}
           </div>
