@@ -16,7 +16,7 @@ class OptionsList extends Component {
           <div className="card-deck">
             {options.map((option, index) => {
             return (
-              <div className="card">            
+              <div className="card" key={index}>            
               <h4 className="card-header">{ option.name }</h4>  
               {console.log(type,option.id)}                
                 <img className="card-img-top"  src={`/${type}/${option.id}.png`}  alt={option.name}  ></img>                  

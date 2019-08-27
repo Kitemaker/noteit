@@ -30,7 +30,7 @@ class TodoListItem extends Component {
             value={this.props.index}
             inputProps={{'aria-label': 'primary checkbox',}}
       />
-            {this.props.item.value}
+            {this.props.item.text}
             <button type="button" className="close" onClick={this.onClickClose}>&times;</button>
           </div>
         </li>     

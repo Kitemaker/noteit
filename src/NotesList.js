@@ -10,7 +10,7 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { Paper } from '@material-ui/core';
-
+import Grid from '@material-ui/core/Grid';
 
 
 class NotesList extends Component {
@@ -101,9 +101,9 @@ class NotesList extends Component {
     let options = {
       encrypt: false
     }
-    this.userSession.putFile("notes.json", JSON.stringify(newdata), options)
+    this.userSession.putFile(NOTES_FILE, JSON.stringify(newdata), options)
     .then(() => {
-       console.log("Meeage from putFile",JSON.stringify(newdata));
+       console.log("Message from putFile",JSON.stringify(newdata));
        this.readNotes();
     });   
     
@@ -151,10 +151,13 @@ class NotesList extends Component {
     console.log('message from render value of cardarray', cardarray);
 
     return (
-      <div className="OptionsList container">        
-          <Typography variant="h3" gutterBottom color="textPrimary">
-            Add Note...
-          </Typography>
+      <div className="OptionsList container"> 
+              <Grid container spacing={3}> 
+                <Grid item xs={12}>         
+                  <Typography variant="h5" gutterBottom color="primary">Notes</Typography>
+                </Grid>  
+              </Grid>       
+        
           <div>
               <Paper className={this.useStyles.paper}>
                 <div>

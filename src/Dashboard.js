@@ -23,7 +23,6 @@ import TodosList from './TodosList';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import ListSubheader from '@material-ui/core/ListSubheader';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import PeopleIcon from '@material-ui/icons/People';
@@ -32,6 +31,9 @@ import LayersIcon from '@material-ui/icons/Layers';
 import { appConfig , NOTES_FILE} from './constants'
 import { UserSession } from 'blockstack'
 import AssignmentIcon from '@material-ui/icons/Assignment';
+import DoneAllIcon from '@material-ui/icons/DoneAll';
+import ClassIcon from '@material-ui/icons/Class';
+import BallotIcon from '@material-ui/icons/Ballot';
 import { read } from 'fs';
 
 const drawerWidth = 240;
@@ -147,10 +149,7 @@ export default function Dashboard(props) {
     notesData: readNotes
     
   });
-
-   
   
-
 function ListItemClicked(event){
   console.log('itemclicked ', event, event.target.textContent);
   setValues(values => ({
@@ -159,9 +158,6 @@ function ListItemClicked(event){
   }));    
 
 }
-
-
-  // const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   return (
     <div className={classes.root}>
@@ -210,13 +206,13 @@ function ListItemClicked(event){
           </ListItem>
           <ListItem button onClick={ListItemClicked}>
       <ListItemIcon>
-        <ShoppingCartIcon />
+        <ClassIcon />
       </ListItemIcon>
       <ListItemText primary="Notes" />
     </ListItem>
     <ListItem button onClick={ListItemClicked}>
       <ListItemIcon>
-        <PeopleIcon />
+        <BallotIcon />
       </ListItemIcon>
       <ListItemText primary="Todos" />
     </ListItem>
