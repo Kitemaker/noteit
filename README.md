@@ -1,3 +1,4 @@
+#Notit
 ## Inspiration
 Secure and safe note taking app where user must have full control on the data for their notes and task management
 ## What it does
