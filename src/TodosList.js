@@ -28,7 +28,7 @@ class TodosList extends Component {
       newTodoItemValue:""
     } 
 
-   // this.readNotes =  this.readNotes.bind(this)   
+   // this.readTodos =  this.readTodos.bind(this)   
     console.log('from constructor', this.state.notes);
     this.useStyles = makeStyles(theme => ({
       container: {
@@ -38,6 +38,7 @@ class TodosList extends Component {
       textField: {
         marginLeft: theme.spacing(2),
         marginRight: theme.spacing(3),
+        color: 'primary',
       },
       dense: {
         marginTop: theme.spacing(2),
@@ -57,7 +58,7 @@ class TodosList extends Component {
   }
 
   componentWillMount() {
-   this.readNotes() 
+   this.readTodos() 
   }
 
 
@@ -71,7 +72,7 @@ class TodosList extends Component {
     this.userSession.putFile("todos.json", JSON.stringify({"data":[]}), options)
       .then(() => {
          console.log("Message from removeAll done");
-         this.readNotes();
+         this.readTodos();
       }); 
   }
 
@@ -94,12 +95,12 @@ class TodosList extends Component {
     this.userSession.putFile("todos.json", JSON.stringify({"data":todos}), options)
       .then(() => {
          console.log("Meeage from put file of deleteNoteHandler",JSON.stringify(todos));
-         this.readNotes();
+         this.readTodos();
       }); 
   }
 
 
-  readNotes = ()=>{
+  readTodos = ()=>{
     
     let options = {
       decrypt: false
@@ -107,7 +108,7 @@ class TodosList extends Component {
     this.userSession.getFile(TODOS_FILE, options)
     .then((fileContents) => {
       if(fileContents) {
-        console.log("message from readNotes getfile items  = ", JSON.parse(fileContents));
+        console.log("message from readTodos getfile items  = ", JSON.parse(fileContents));
         let todolist = JSON.parse(fileContents);
         if(todolist){
         this.setState({         
@@ -122,7 +123,7 @@ class TodosList extends Component {
       }    
       } 
     }).catch((error) => {
-      console.error('message from readNotes value of this.state.notes Error:', error);
+      console.error('message from readTodos value of this.state.notes Error:', error);
     
     });
     
@@ -137,7 +138,7 @@ class TodosList extends Component {
     this.userSession.putFile(TODOS_FILE, JSON.stringify(newdata), options)
     .then(() => {
        console.log("Message from putFile",JSON.stringify(newdata));
-       this.readNotes();
+       this.readTodos();
     });   
     
   }
@@ -169,7 +170,7 @@ class TodosList extends Component {
     this.userSession.putFile(TODOS_FILE, JSON.stringify({"data":todoData}), options)
     .then(() => {
       console.log("Message from put file of markTodoDone",JSON.stringify(todoData));
-     this.readNotes();
+     this.readTodos();
     }); 
 
   }
@@ -191,10 +192,12 @@ class TodosList extends Component {
       this.userSession.putFile(TODOS_FILE, JSON.stringify({"data":newData}), options)
       .then(() => {
          console.log("Meeage from putFile",JSON.stringify(newData));
-         this.readNotes();
+         this.readTodos();
       });
-    }     
-
+    }
+    if(document.getElementById('todo-title'))
+    {document.getElementById('todo-title').value = "";
+  }
   }
 
   render() { 
@@ -214,14 +217,14 @@ class TodosList extends Component {
                 </Grid>  
                 <Grid container spacing={3}> 
               <Grid item xs>              
-                <TextField  id="note-title"
-                fullWidth
-                            label="Add Todo"                          
+                <TextField  id="todo-title"
+                            fullWidth
+                            label="Add To-Do"                          
                             className={this.useStyles.textField}                          
                             onChange={this.handleValueChange}
                             margin="normal"
                             variant="outlined"
-                            placeholder="enter to-do"
+                            placeholder="enter To-Do"
                           />
                 <Button variant="contained"  onClick={this.addTodoItem} color="primary">Add </Button>            
                 {/* <TodoForm addItem={this.addTodoItem} /> */}

@@ -79,18 +79,28 @@ export default function SignInSide() {
                 Sign in with Blockstack         
           
           </Button>
-          <Grid container>             
+          <Grid container >             
             <Grid item>
               <Link href="https://browser.blockstack.org/" variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
           </Grid>
-          <Box mt={5}>          
-          </Box>
+        
+          {/* <Box mt={5}>          
+          </Box> */}
         </form>
       </div>
+      <Grid item spacing={2}> 
+     
+          <Typography variant="overline" gutterBottom  display="block" align="center">
+          Create and save notes and to-do items, in secure way.
+        </Typography>
+      
+          </Grid> 
     </Grid>
+  
+  
   </Grid>
   );
 }

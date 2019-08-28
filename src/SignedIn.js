@@ -1,12 +1,8 @@
 import React, { Component } from 'react'
-
 import { UserSession } from 'blockstack'
 import Dashboard from './Dashboard'
-
-import { appConfig, ME_FILENAME } from './constants'
+import { appConfig } from './constants'
 import './SignedIn.css'
-import NotesList from './NotesList';
-import TodosList from './TodosList';
 
 
 class SignedIn extends Component {
@@ -29,7 +25,7 @@ class SignedIn extends Component {
 
   render() {
     const username = this.userSession.loadUserData().username
-    const me = this.state.me   
+    // const me = this.state.me   
     
     return (
       <div className="SignedIn">

@@ -16,7 +16,6 @@ import Paper from '@material-ui/core/Paper';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import  {mainListItems}  from './listItems';
 import OptionsList from './OptionsList';
 import NotesList from './NotesList';
 import TodosList from './TodosList';
@@ -24,14 +23,8 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import DashboardIcon from '@material-ui/icons/Dashboard';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import PeopleIcon from '@material-ui/icons/People';
-import BarChartIcon from '@material-ui/icons/BarChart';
-import LayersIcon from '@material-ui/icons/Layers';
-import { appConfig , NOTES_FILE} from './constants'
+import { appConfig , NOTES_FILE, TODOS_FILE} from './constants'
 import { UserSession } from 'blockstack'
-import AssignmentIcon from '@material-ui/icons/Assignment';
-import DoneAllIcon from '@material-ui/icons/DoneAll';
 import ClassIcon from '@material-ui/icons/Class';
 import BallotIcon from '@material-ui/icons/Ballot';
 import { read } from 'fs';
@@ -113,12 +106,15 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'column',
   },
   fixedHeight: {
-    height: 240,
+    height: 200,
   },
 }));
 
 export default function Dashboard(props) {
+  const  userSession = new UserSession({ appConfig })   
   const classes = useStyles();
+ let   notesData;
+   let todosData ;
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -126,29 +122,66 @@ export default function Dashboard(props) {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+  const [values, setValues] = React.useState({
+    activeItem: 'Dashboard',
+    notesData: null,
+
+  });
+
+    
+  //     notesData = readNotes();
+  //   todosData = readTodos();
+  //  console.log('notes = ',notesData, 'todos', todosData);
+  
 
   function readNotes(){
     
     let options = {
       decrypt: false
     };     
-    const  userSession = new UserSession({ appConfig })   
+    // const  userSession = new UserSession({ appConfig })   
     userSession.getFile(NOTES_FILE, options)
-    .then((fileContents) => {
-      if(fileContents) {
-        console.log("message from readNotes getfile items  = ", JSON.parse(fileContents));
-        let notelist = JSON.parse(fileContents);
-        return notelist.data
+    .then((notesData) => {
+      if(notesData) {
+        console.log("message from readNotes getfile items  = ", JSON.parse(notesData));
+         return JSON.parse(notesData);    
+       
       };
+    }).catch((error) => {
+      console.error('message from read notes value of this.state.notes Error:', error);    
     });
    
   }
 
-  const [values, setValues] = React.useState({
-    activeItem: 'Dashboard',    
-    notesData: readNotes
+
+
+
+  function readTodos(){
     
-  });
+    let options = {
+      decrypt: false
+    }   
+
+    userSession.getFile(TODOS_FILE, options)
+    .then((fileContents) => {
+      if(fileContents) {
+        console.log("message from readTodos getfile items  = ", JSON.parse(fileContents));
+        return JSON.parse(fileContents);
+                  
+      } 
+    }).catch((error) => {
+      console.error('message from read Todos value of this.state.notes Error:', error);    
+    });
+    
+  } 
+
+function cardClicked(item){
+  console.log('cardClicked ', item);
+  setValues(values => ({
+    ...values,          
+    activeItem: item.target.id,
+  }));    
+}
   
 function ListItemClicked(event){
   console.log('itemclicked ', event, event.target.textContent);
@@ -157,8 +190,9 @@ function ListItemClicked(event){
     activeItem: event.target.textContent,
   }));    
 
-}
 
+}
+  
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -216,18 +250,6 @@ function ListItemClicked(event){
       </ListItemIcon>
       <ListItemText primary="Todos" />
     </ListItem>
-    <ListItem button >
-      <ListItemIcon>
-        <BarChartIcon />
-      </ListItemIcon>
-      <ListItemText primary="Facebook" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <LayersIcon />
-      </ListItemIcon>
-      <ListItemText primary="Mail" />
-    </ListItem>
 
 
         </List>
@@ -244,7 +266,7 @@ function ListItemClicked(event){
                 {                
                   (values.activeItem === 'Dashboard')? 
                                    
-                    <OptionsList type="ITEMS"  currentUsername = {props.currentUsername} />
+                    <OptionsList type="ITEMS" click={cardClicked} currentUsername = {props.currentUsername} />
                     :
                     (values.activeItem === 'Notes')?
                       <NotesList></NotesList>
@@ -252,7 +274,7 @@ function ListItemClicked(event){
                       (values.activeItem === 'Todos')?
                       <TodosList></TodosList>
                       :
-                      <OptionsList type="ITEMS"  currentUsername = {props.currentUsername}/>        
+                      <OptionsList type="ITEMS" click={cardClicked}  currentUsername = {props.currentUsername}/>        
                 
                 }
               </Paper>

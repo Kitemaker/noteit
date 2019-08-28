@@ -13,6 +13,8 @@ import { Paper } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 
 
+
+
 class NotesList extends Component {
 
   constructor(props) {
@@ -20,7 +22,7 @@ class NotesList extends Component {
 
     this.userSession = new UserSession({ appConfig })
     this.username = this.userSession.loadUserData().username
-    
+  
     this.state = {
       notes: [],
       newNoteTitle:"",
@@ -30,6 +32,9 @@ class NotesList extends Component {
    // this.readNotes =  this.readNotes.bind(this)   
     console.log('from constructor', this.state.notes);
     this.useStyles = makeStyles(theme => ({
+      root: {
+        flexGrow: 1,
+      },
       container: {
         display: 'flex',
         flexWrap: 'wrap',
@@ -54,6 +59,7 @@ class NotesList extends Component {
       },
     }));
   }
+  
 
   componentWillMount() {
    this.readNotes() 
@@ -157,9 +163,9 @@ class NotesList extends Component {
                   <Typography variant="h5" gutterBottom color="primary">Notes</Typography>
                 </Grid>  
               </Grid>       
-        
-          <div>
-              <Paper className={this.useStyles.paper}>
+              <Grid container spacing={3}> 
+              <Grid item xs={12}>    
+             
                 <div>
                   {/* <input className="w3-input w3-border" type="text" required=""  onChange={this.handleTitleChange} placeholder="note title..."/>  
                     */}
@@ -190,20 +196,28 @@ class NotesList extends Component {
                     />
                 {/* <div><button type="button" className="w3-btn w3-padding w3-blue" onClick={this.addNoteHandler} style={{width:"120px"}}>Add </button></div>  */}
                 <Button variant="contained" fullWidth onClick={this.addNoteHandler} color="primary">Add </Button>             
-                </Paper>
-          </div>
-          <div className="card-deck" style={{marginTop:"20px"}}>
-            
-            {cardarray.map((option, index) => {
-            return <div ><NoteCardNew
-                  click={() => this.deleteNoteHandler(index)}
-                  key={option.id} 
-                  title = {option.name}
-                  value={option.text} />
-                  </div>
+             
+                </Grid>  
+                </Grid>  
+          {/* <div className="card-deck" style={{marginTop:"20px"}}> */}
+          <Grid container className={this.useStyles.root} spacing={2}>
+            <Grid item xs={12}>
+              <Grid container justify="center" spacing={2}>
+              {cardarray.map((option, index) => {
+                return(
+                <Grid item key={index} ><NoteCardNew
+                      click={() => this.deleteNoteHandler(index)}
+                      // key={option.id} 
+                      title = {option.name}
+                      value={option.text} />
+                      </Grid>
                 
-            })}
-          </div>
+              )})}
+              </Grid>
+            </Grid>
+          </Grid>
+        
+          {/* </div> */}
       </div>
     );
   }
